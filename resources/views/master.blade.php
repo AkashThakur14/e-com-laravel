@@ -38,6 +38,8 @@
     }
     img.slider-img{
         height: 400px !important;
+        display:flex;
+        margin: 0 auto;
     }
     .custom-product{
         height: 600px;
@@ -55,5 +57,11 @@
     .trending-wrapper{
        margin: 30px;
     }
+.detail-img{
+    height: 200px;
+}
+.custom-detail{
+    margin-top: 100px
+}
 </style>
 </html>
