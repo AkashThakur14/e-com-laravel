@@ -63,5 +63,8 @@
 .custom-detail{
     margin-top: 100px
 }
+.search-box{
+    width: 500px;
+}
 </style>
 </html>
