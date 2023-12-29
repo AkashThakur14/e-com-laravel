@@ -7,6 +7,7 @@ use App\Models\Product;
 use PHPUnit\Framework\MockObject\Stub\ReturnCallback;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -34,23 +35,34 @@ class ProductController extends Controller
 
     function addToCart(Request $req)
     {
-        if ($req->session()->has('user'))
-         {
-            $cart=new Cart;
+        if ($req->session()->has('user')) {
+            $cart = new Cart;
             $cart->user_id = $req->session()->get('user')['id'];
             $cart->product_id = $req->product_id;
             $cart->save();
             return redirect('/');
-        }
-        else
-        {
+        } else {
             return redirect('/login');
         }
     }
 
 
- static function cartItem(){
-    $userId = Session::get('user',['id']);
-    return Cart::where('user_id',$userId)->count();
-}
+    static function cartItem()
+    {
+        $userId = Session::get('user', ['id']);
+        return Cart::where('user_id', $userId)->Count();
+    }
+
+
+
+    function cartlist()
+    {
+        $userId = Session::get('user')['id'];
+$products = DB::table('cart')
+->join('products','cart.product_id','=','product_id')
+->where('cart.user_id',$userId)
+->select('products.*')
+->get();
+return view('cartlist',['products'=>$products]);
+    }
 }
