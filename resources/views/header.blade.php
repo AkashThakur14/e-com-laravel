@@ -1,8 +1,9 @@
 <?php
 use App\Http\Controllers\ProductController;
-$total = 0;
-if (Session::has('user')) {
-    $total = ProductController::cartItem();
+$total=0;
+if(Session::has('user'))
+{
+  $total= ProductController::cartItem();
 }
 
 ?>
@@ -31,20 +32,16 @@ if (Session::has('user')) {
                 <li class="nav-item">
                     <a class="nav-link" href="cartlist">Cart({{ $total }})</a>
                 </li>
-                @if (Session::has('user'))
-                <li class="dropdown nav-item">
-                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">{{Session::get('user')['name']}}</a>
-                    <span class="caret"></span>
-                    <ul class="dropdown-menu ">
-                        <li><a class="nav-link" href="/logout">Logout</a></li>
-
-
-                    </ul>
-
+                @if(Session::has('user'))
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{Session::get('user')['name']}}
+                  <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/logout">Logout</a></li>
+                  </ul>
                 </li>
                 @else
-                <li class="nav-item">
-                    <a class="nav-link" href="/login"></a>Login</li>
+                <li><a href="/login">Login</a></li>
                 @endif
             </ul>
         </div>
